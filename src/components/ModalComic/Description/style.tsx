@@ -158,6 +158,10 @@ export const Contain = styled.div`
       padding: 1rem;
 
       p {
+        margin-top: 0.6rem;
+      }
+
+      p {
         & + h3 {
           margin-top: 0.6rem;
         }

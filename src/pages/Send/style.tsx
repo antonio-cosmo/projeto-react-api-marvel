@@ -28,6 +28,7 @@ export const Container = styled.main`
 `;
 
 export const Content = styled.div`
+  margin-bottom: 1.5rem;
   input {
     width: 400px;
     padding: 10px 5px;

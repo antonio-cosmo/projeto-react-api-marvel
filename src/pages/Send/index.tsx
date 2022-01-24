@@ -53,7 +53,8 @@ export function Send() {
     setMarker(1);
     ApiMaps.get('json', { params: { latlng: `${lat},${lng}` } }).then(
       (response) => {
-        console.log(response.data.results);
+        const formatAdrress = response.data.results[0].formatted_address;
+        setAddressSend(formatAdrress);
       }
     );
   };
@@ -62,9 +63,10 @@ export function Send() {
     <Container>
       <Content>
         <Address>
+          <p>Endereço:</p>
           <input
             type="text"
-            placeholder="Enderço para envio"
+            placeholder="Endereço para envio"
             defaultValue={addressSend}
           />
         </Address>
