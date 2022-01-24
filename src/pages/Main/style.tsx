@@ -32,20 +32,6 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
 
-  #more {
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0.5rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #ff3333;
-
-    &:hover {
-      background-color: #ff9999;
-    }
-  }
-
   @media (min-width: 650px) and (max-width: 879px) {
     max-width: 650px;
   }
@@ -64,6 +50,7 @@ export const Content = styled.div`
 `;
 
 export const CardList = styled.ul`
+  margin-top: 40px;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

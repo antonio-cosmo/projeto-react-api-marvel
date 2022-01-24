@@ -23,6 +23,14 @@ export const Card = styled.li`
     background-size: cover;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+
+    .checkbox-container {
+      input {
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+      }
+    }
   }
 
   &:hover {

@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Comic } from '../../components/Comic';
 import { ModalComic } from '../../components/ModalComic';
@@ -106,6 +107,12 @@ export function Main() {
         comicId={comics[modalComicId]}
       />
       <Content>
+        <Link to="send">
+          <Button id="more" type="button" onClick={handleMore}>
+            {' '}
+            Enviar-me{' '}
+          </Button>
+        </Link>
         <CardList>
           {comics.map((comic: IComic, index: number) => {
             return (

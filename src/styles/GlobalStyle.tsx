@@ -20,7 +20,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font-family: 'Marvel', sans-serif;
+    /* font-family: 'Marvel', sans-serif; */
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
   }
 
