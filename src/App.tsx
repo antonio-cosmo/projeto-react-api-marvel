@@ -1,35 +1,23 @@
-import { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Api } from './services/Api';
+import { Header } from './components/Header';
+import { HeaderContextProvider } from './context';
+import { Routers } from './routers';
 import { GlobalStyle } from './styles/GlobalStyle';
 
-interface ICharacter {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
+Modal.setAppElement('#root');
+
+function App() {
+  return (
+    <BrowserRouter>
+      <HeaderContextProvider>
+        <Header />
+        <Routers />
+        <GlobalStyle />
+      </HeaderContextProvider>
+    </BrowserRouter>
+  );
 }
 
-export function App() {
-  const [loadCharacters, setLoadCharacters] = useState<ICharacter[]>([]);
-  const limit = 8;
-
-  useEffect(() => {
-    async function loader() {
-      try {
-        const response = await Api.get('characters', { params: { limit } });
-        const { results } = response.data.data;
-        setLoadCharacters(results);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    loader();
-  }, []);
-  console.log(loadCharacters);
-
-  return <GlobalStyle />;
-}
+export default App;
