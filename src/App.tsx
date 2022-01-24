@@ -8,7 +8,7 @@ import { GlobalStyle } from './styles/GlobalStyle';
 
 Modal.setAppElement('#root');
 
-function App() {
+export function App() {
   return (
     <BrowserRouter>
       <HeaderContextProvider>
@@ -19,5 +19,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
