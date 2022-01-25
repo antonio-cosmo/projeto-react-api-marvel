@@ -57,7 +57,7 @@ export const Form = styled.form`
     border-radius: 5px;
 
     @media (min-width: 350px) and(max-width: 499px) {
-      width: 14rem;
+      max-width: 10rem;
     }
 
     @media (max-width: 349px) {

@@ -1,8 +1,10 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 
+import { ComicSelected } from '../../components/Comic/ComicsSelected';
 import { Map } from '../../components/Map';
+import { HeaderContext } from '../../context';
 import { ApiMaps } from '../../services/ApiMaps';
-import { Address, Container, Content, Form } from './style';
+import { Address, Container, Content, Form, LinkItem, ListCard } from './style';
 
 interface ILocation {
   lat: number;
@@ -16,6 +18,7 @@ export function Send() {
   const [zoom, setZoom] = useState(4);
   const [marker, setMarker] = useState(0);
   const zoomOfSearch = 16;
+  const { comicsSelected, handleSelect } = useContext(HeaderContext);
 
   useEffect(() => {
     ApiMaps.get('json', { params: { address: 'brasil' } }).then((response) => {
@@ -61,9 +64,27 @@ export function Send() {
 
   return (
     <Container>
+      <LinkItem to="/">
+        <p>Voltar</p>
+      </LinkItem>
       <Content>
+        <ListCard>
+          {comicsSelected.length !== 0 ? (
+            comicsSelected.map((comic) => {
+              return (
+                <ComicSelected
+                  key={comic.id}
+                  comic={comic}
+                  handleSelect={handleSelect}
+                />
+              );
+            })
+          ) : (
+            <p>Selecione os quadrinos para envio</p>
+          )}
+        </ListCard>
         <Address>
-          <p>Endereço:</p>
+          <p>Endereço para envio:</p>
           <input
             type="text"
             placeholder="Endereço para envio"

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.main`
@@ -40,8 +41,25 @@ export const Content = styled.div`
   }
 `;
 
-export const ListCard = styled.div`
+export const LinkItem = styled(Link)`
+  color: #202020;
+  p {
+    margin-bottom: 2rem;
+  }
+`;
+
+export const ListCard = styled.ul`
   width: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+
+  p {
+    font-style: italic;
+  }
 `;
 
 export const Address = styled.div`

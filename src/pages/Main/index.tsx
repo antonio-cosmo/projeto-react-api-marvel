@@ -23,7 +23,7 @@ export function Main() {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [modalComicId, setModalComicId] = useState<number>(0);
   const [comics, setComics] = useState<IComic[]>([]);
-  const limit = 8;
+  const limit = 9;
   const { nameComic } = useContext(HeaderContext);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function Main() {
   const handleMore = useCallback(async () => {
     try {
       if (!nameComic) {
-        const limit = comics.length + 8;
+        const limit = comics.length + 9;
 
         const response = await Api.get('comics', {
           params: {
@@ -69,7 +69,7 @@ export function Main() {
 
         setComics(results);
       } else {
-        const limit = comics.length + 8;
+        const limit = comics.length + 9;
 
         const response = await Api.get('comics', {
           params: {
@@ -126,6 +126,7 @@ export function Main() {
             );
           })}
         </CardList>
+
         <Button id="more" type="button" onClick={handleMore}>
           {' '}
           carregar mais{' '}

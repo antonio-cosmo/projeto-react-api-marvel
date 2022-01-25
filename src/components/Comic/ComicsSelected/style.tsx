@@ -9,56 +9,36 @@ interface IUrlImage {
 const urlImg = ({ imagem }: IUrlImage) => `${imagem.path}.${imagem.extension}`;
 
 export const Card = styled.li`
-  width: 240px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: all 300ms ease-in-out;
   margin-bottom: 2rem;
 
-  div#img {
+  div#imgComic {
     width: 100%;
-    height: 300px;
+    height: 250px;
     background: url(${urlImg}) no-repeat center;
     background-size: cover;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-
-    .checkbox-container {
-      input {
-        height: 20px;
-        width: 20px;
-        cursor: pointer;
-
-        &:not(:checked) {
-          display: none;
-        }
-      }
-    }
-  }
-
-  &:hover {
-    transform: translate(1%) scale(1.05);
-  }
-
-  #details {
-    font-size: 1rem;
-    font-weight: 700;
-    background-color: #202020;
-    color: #fff;
-    border: 0;
-    padding: 0 2rem;
-    height: 3rem;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    &:hover {
-      background-color: #666666;
-    }
+    border-radius: 5px;
   }
 
   p {
     align-self: center;
+  }
+
+  button {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.2rem 1rem;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #ff3333;
+    &:hover {
+      background-color: #ff9999;
+    }
   }
 
   @media (min-width: 880px) and (max-width: 1019px) {

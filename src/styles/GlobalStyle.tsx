@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 700px;
     background-color: #202020 ;
     color: #ffffff;
+    border-radius: 5px;
     @media (min-width: 880px){
       width: 550px;
     }

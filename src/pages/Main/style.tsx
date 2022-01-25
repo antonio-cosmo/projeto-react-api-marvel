@@ -57,8 +57,13 @@ export const CardList = styled.ul`
   gap: 1.5rem;
 
   @media (min-width: 880px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.8rem;
+    /* grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem; */
+    gap: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
   }
   @media (min-width: 650px) and (max-width: 879px) {
     grid-template-columns: repeat(2, 1fr);
@@ -69,18 +74,21 @@ export const CardList = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
   }
 
   @media (min-width: 350px) and (max-width: 499px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
   }
 
   @media (max-width: 349px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
   }
 `;
 
