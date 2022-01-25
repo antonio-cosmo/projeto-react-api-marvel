@@ -13,7 +13,6 @@ export const Card = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all 300ms ease-in-out;
   margin-bottom: 2rem;
 
   div#imgComic {
@@ -42,55 +41,43 @@ export const Card = styled.li`
   }
 
   @media (min-width: 880px) and (max-width: 1019px) {
-    width: 200px;
+    width: 160px;
     margin-bottom: 1.5rem;
-    &:hover {
-      transform: translate(1%) scale(1.05);
-    }
-    div#img {
-      height: 250px;
-    }
-  }
-
-  @media (min-width: 650px) and (max-width: 879px) {
-    width: 240px;
-    margin-bottom: 1.5rem;
-    &:hover {
-      transform: translate(1%) scale(1.05);
-    }
-    div#img {
-      height: 300px;
-    }
-  }
-
-  @media (min-width: 500px) and (max-width: 649px) {
-    width: 200px;
-    margin-bottom: 1.2rem;
-    &:hover {
-      transform: translate(1%) scale(1.05);
-    }
-    div#img {
-      height: 250px;
-    }
-  }
-
-  @media (min-width: 350px) and (max-width: 499px) {
-    width: 150px;
-    &:hover {
-      transform: translate(1%) scale(1.05);
-    }
-    div#img {
+    div#imgComic {
       height: 200px;
     }
   }
 
-  @media (max-width: 349px) {
-    width: 100px;
-    &:hover {
-      transform: translate(1%) scale(1.05);
+  @media (min-width: 650px) and (max-width: 879px) {
+    width: 140px;
+    margin-bottom: 1.5rem;
+    div#imgComic {
+      height: 180px;
     }
-    div#img {
-      height: 130px;
+  }
+
+  @media (min-width: 500px) and (max-width: 649px) {
+    width: 120px;
+    margin-bottom: 1.2rem;
+    div#imgComic {
+      height: 150px;
+    }
+  }
+
+  @media (min-width: 350px) and (max-width: 499px) {
+    width: 100px;
+    div#imgComic {
+      height: 120px;
+    }
+  }
+
+  @media (max-width: 349px) {
+    width: 80px;
+    div#imgComic {
+      height: 100px;
+    }
+    p {
+      font-size: 12px;
     }
   }
 `;

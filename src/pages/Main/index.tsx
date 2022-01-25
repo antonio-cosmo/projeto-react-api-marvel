@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Comic } from '../../components/Comic';
 import { ModalComic } from '../../components/ModalComic';
-import { HeaderContext } from '../../context';
+import { GenericContext } from '../../context';
 import { Api } from '../../services/ApiMarvel';
 import { Container, CardList, Content, Button } from './style';
 
@@ -24,7 +24,7 @@ export function Main() {
   const [modalComicId, setModalComicId] = useState<number>(0);
   const [comics, setComics] = useState<IComic[]>([]);
   const limit = 9;
-  const { nameComic } = useContext(HeaderContext);
+  const { nameComic } = useContext(GenericContext);
 
   useEffect(() => {
     async function loader() {
@@ -107,30 +107,36 @@ export function Main() {
         comicId={comics[modalComicId]}
       />
       <Content>
-        <Link to="send">
-          <Button id="more" type="button" onClick={handleMore}>
-            {' '}
-            Enviar-me{' '}
-          </Button>
-        </Link>
-        <CardList>
-          {comics.map((comic: IComic, index: number) => {
-            return (
-              <Comic
-                key={comic.id}
-                comic={comic}
-                onOpenModal={handleOpenModal}
-                clickedComic={clickedComic}
-                index={index}
-              />
-            );
-          })}
-        </CardList>
+        {!comics.length ? (
+          <p>Carregando informações...</p>
+        ) : (
+          <>
+            <Link to="send">
+              <Button id="more" type="button" onClick={handleMore}>
+                {' '}
+                Enviar-me{' '}
+              </Button>
+            </Link>
+            <CardList>
+              {comics.map((comic: IComic, index: number) => {
+                return (
+                  <Comic
+                    key={comic.id}
+                    comic={comic}
+                    onOpenModal={handleOpenModal}
+                    clickedComic={clickedComic}
+                    index={index}
+                  />
+                );
+              })}
+            </CardList>
 
-        <Button id="more" type="button" onClick={handleMore}>
-          {' '}
-          carregar mais{' '}
-        </Button>
+            <Button id="more" type="button" onClick={handleMore}>
+              {' '}
+              Carregar mais{' '}
+            </Button>
+          </>
+        )}
       </Content>
     </Container>
   );

@@ -56,8 +56,12 @@ export const Form = styled.form`
     font-size: 1.2rem;
     border-radius: 5px;
 
-    @media (min-width: 350px) and(max-width: 499px) {
-      max-width: 10rem;
+    @media (min-width: 500px) and (max-width: 649px) {
+      width: 12rem;
+    }
+
+    @media (min-width: 350px) and (max-width: 499px) {
+      width: 10rem;
     }
 
     @media (max-width: 349px) {
@@ -68,4 +72,9 @@ export const Form = styled.form`
 
 export const ItemLink = styled(Link)`
   text-decoration: none;
+  @media (max-width: 649px) {
+    h1 {
+      font-size: 28px;
+    }
+  }
 `;

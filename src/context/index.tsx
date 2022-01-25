@@ -1,10 +1,10 @@
 import { createContext, FormEvent, ReactNode, useState } from 'react';
 
-interface IHeaderContextProviderProps {
+interface IGenericContextProviderProps {
   children: ReactNode;
 }
 
-interface IHearderContextData {
+interface IGenericContextData {
   nameComic: string;
   handleSubmit: (event: FormEvent) => void;
   handleSearch: (name: string) => void;
@@ -23,13 +23,13 @@ interface IComic {
     extension: string;
   };
 }
-export const HeaderContext = createContext<IHearderContextData>(
-  {} as IHearderContextData
+export const GenericContext = createContext<IGenericContextData>(
+  {} as IGenericContextData
 );
 
-export function HeaderContextProvider({
+export function GenericContexProvider({
   children,
-}: IHeaderContextProviderProps) {
+}: IGenericContextProviderProps) {
   const [nameComic, setNameComic] = useState<string>('');
   const [comicsSelected, setComicsSelected] = useState<IComic[]>([]);
 
@@ -41,8 +41,6 @@ export function HeaderContextProvider({
       setComicsSelected([...comicsSelected, comic]);
     }
   };
-
-  console.log(comicsSelected);
 
   const handleSearch = (name: string) => {
     if (name.length >= 3) {
@@ -57,8 +55,7 @@ export function HeaderContextProvider({
   };
 
   return (
-    <HeaderContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <GenericContext.Provider
       value={{
         handleSelect,
         handleSearch,
@@ -68,6 +65,6 @@ export function HeaderContextProvider({
       }}
     >
       {children}
-    </HeaderContext.Provider>
+    </GenericContext.Provider>
   );
 }

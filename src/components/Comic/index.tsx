@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import { HeaderContext } from '../../context';
+import { GenericContext } from '../../context';
 import { Card } from './style';
 
 interface IComicProps {
@@ -27,7 +27,7 @@ export function Comic({
   index,
 }: IComicProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { handleSelect } = useContext(HeaderContext);
+  const { handleSelect } = useContext(GenericContext);
 
   return (
     <Card imagem={comic.thumbnail}>

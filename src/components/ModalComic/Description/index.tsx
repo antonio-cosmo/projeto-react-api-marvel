@@ -1,4 +1,3 @@
-// import closeImg from '../../../assets/botao-fechar.svg';
 import { Contain } from './style';
 
 interface IDescriptionProps {
@@ -21,10 +20,6 @@ export function Description({ comicId }: IDescriptionProps) {
 
   return (
     <Contain imagem={comicId.thumbnail}>
-      {/* <button className="closeModal" type="button" onClick={handleCloseModal}>
-        <img src={closeImg} alt="fechar" />
-      </button> */}
-
       <div id="img" />
 
       <div id="infor">

@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
 // import logoMarvel from '../../assets/logomarvel.jpg';
-import { HeaderContext } from '../../context';
+import { GenericContext } from '../../context';
 import { Container, Contain, Form, ItemLink } from './style';
 
 export function Header() {
-  const { handleSubmit, handleSearch } = useContext(HeaderContext);
+  const { handleSubmit, handleSearch } = useContext(GenericContext);
   return (
     <Container>
       <Contain>

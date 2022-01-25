@@ -2,9 +2,9 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 
 import { ComicSelected } from '../../components/Comic/ComicsSelected';
 import { Map } from '../../components/Map';
-import { HeaderContext } from '../../context';
+import { GenericContext } from '../../context';
 import { ApiMaps } from '../../services/ApiMaps';
-import { Address, Container, Content, Form, LinkItem, ListCard } from './style';
+import { Address, Container, Content, Form, ItemLink, ListCard } from './style';
 
 interface ILocation {
   lat: number;
@@ -18,7 +18,7 @@ export function Send() {
   const [zoom, setZoom] = useState(4);
   const [marker, setMarker] = useState(0);
   const zoomOfSearch = 16;
-  const { comicsSelected, handleSelect } = useContext(HeaderContext);
+  const { comicsSelected, handleSelect } = useContext(GenericContext);
 
   useEffect(() => {
     ApiMaps.get('json', { params: { address: 'brasil' } }).then((response) => {
@@ -64,9 +64,9 @@ export function Send() {
 
   return (
     <Container>
-      <LinkItem to="/">
+      <ItemLink to="/">
         <p>Voltar</p>
-      </LinkItem>
+      </ItemLink>
       <Content>
         <ListCard>
           {comicsSelected.length !== 0 ? (
@@ -80,7 +80,7 @@ export function Send() {
               );
             })
           ) : (
-            <p>Selecione os quadrinos para envio</p>
+            <span>Selecione os quadrinos para envio</span>
           )}
         </ListCard>
         <Address>

@@ -38,13 +38,31 @@ export const Content = styled.div`
     border: 1px solid #b3b3b3;
     outline: none;
     border-radius: 5px;
+
+    @media (min-width: 650px) and (max-width: 879px) {
+      width: 300px;
+    }
+
+    @media (min-width: 500px) and (max-width: 649px) {
+      width: 250px;
+    }
+
+    @media (min-width: 350px) and (max-width: 499px) {
+      width: 200px;
+    }
+
+    @media (max-width: 349px) {
+      max-width: 150px;
+    }
   }
 `;
 
-export const LinkItem = styled(Link)`
-  color: #202020;
+export const ItemLink = styled(Link)`
+  text-decoration: none;
   p {
     margin-bottom: 2rem;
+    color: #202020;
+    text-decoration-line: underline;
   }
 `;
 
@@ -57,39 +75,75 @@ export const ListCard = styled.ul`
   align-items: flex-start;
   margin-bottom: 1rem;
 
-  p {
+  span {
     font-style: italic;
+    color: #202020;
   }
 `;
 
 export const Address = styled.div`
   input {
     width: 600px;
+    font-size: 1rem;
     padding: 10px 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     margin-top: 10px;
     border: 1px solid #b3b3b3;
     outline: none;
     border-radius: 5px;
+
+    @media (min-width: 650px) and (max-width: 879px) {
+      width: 500px;
+    }
+
+    @media (min-width: 500px) and (max-width: 649px) {
+      width: 400px;
+    }
+
+    @media (min-width: 350px) and (max-width: 499px) {
+      width: 300px;
+    }
+
+    @media (max-width: 349px) {
+      max-width: 250px;
+    }
   }
 `;
 
 export const Form = styled.form`
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 10px;
   input {
     width: 400px;
     padding: 10px 5px;
-    margin-bottom: 5px;
-    margin-top: 10px;
+    font-size: 1rem;
     border: 1px solid #b3b3b3;
     outline: none;
     border-radius: 5px;
+
+    @media (min-width: 650px) and (max-width: 879px) {
+      width: 300px;
+    }
+
+    @media (min-width: 500px) and (max-width: 649px) {
+      width: 250px;
+    }
+
+    @media (min-width: 350px) and (max-width: 499px) {
+      width: 200px;
+    }
+
+    @media (max-width: 349px) {
+      max-width: 150px;
+    }
   }
 
   button {
-    padding: 10px 5px;
+    padding: 10px 10px;
     font-size: 1rem;
     font-weight: 700;
-    padding: 0.5rem 1.5rem;
     margin-left: 10px;
     border: none;
     border-radius: 5px;
@@ -98,6 +152,16 @@ export const Form = styled.form`
 
     &:hover {
       background-color: #ff9999;
+    }
+
+    @media (min-width: 350px) and (max-width: 499px) {
+      padding: 10px 5px;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 349px) {
+      padding: 10px 5px;
+      font-size: 0.8rem;
     }
   }
 `;
