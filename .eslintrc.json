@@ -102,7 +102,9 @@
       "react/jsx-no-useless-fragment": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "react/jsx-no-constructed-context-values":"off"
+      "react/jsx-no-constructed-context-values":"off",
+      "@typescript-eslint/no-non-null-assertion":"off",
+      "default-param-last":"off"
   },
   "settings": {
       "import/resolver": {

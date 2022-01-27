@@ -12,12 +12,9 @@ interface IDescriptionProps {
       extension: string;
     };
   };
-  // handleCloseModal(): void;
 }
 
 export function Description({ comicId }: IDescriptionProps) {
-  // Abre as informacoes do quadrinho clicado
-
   return (
     <Contain imagem={comicId.thumbnail}>
       <div id="img" />

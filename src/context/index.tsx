@@ -1,28 +1,12 @@
 import { createContext, FormEvent, ReactNode, useState } from 'react';
 
+import { useDebounceInput } from '../hooks/useDebounceInput';
+import { IComic, IGenericContextData } from './type';
+
 interface IGenericContextProviderProps {
   children: ReactNode;
 }
 
-interface IGenericContextData {
-  nameComic: string;
-  handleSubmit: (event: FormEvent) => void;
-  handleSearch: (name: string) => void;
-  handleSelect: (comic: IComic) => void;
-  comicsSelected: IComic[];
-}
-
-interface IComic {
-  id: number;
-  title: string;
-  description: string;
-  stories: { items: { name: string }[] };
-  series: { name: string };
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-}
 export const GenericContext = createContext<IGenericContextData>(
   {} as IGenericContextData
 );
@@ -30,25 +14,27 @@ export const GenericContext = createContext<IGenericContextData>(
 export function GenericContexProvider({
   children,
 }: IGenericContextProviderProps) {
-  const [nameComic, setNameComic] = useState<string>('');
+  const [titleComic, setTitleComic] = useState('');
+
   const [comicsSelected, setComicsSelected] = useState<IComic[]>([]);
 
+  const debounceTitleComic = useDebounceInput(titleComic, 300);
+
   const handleSelect = (comic: IComic) => {
-    const nova = comicsSelected.filter((value) => value.id !== comic.id);
-    if (comicsSelected.length > nova.length) {
-      setComicsSelected(nova);
+    const auxComicsSelected = comicsSelected.filter(
+      (value) => value.id !== comic.id
+    );
+
+    if (comicsSelected.length > auxComicsSelected.length) {
+      setComicsSelected(auxComicsSelected);
     } else {
       setComicsSelected([...comicsSelected, comic]);
     }
   };
 
-  const handleSearch = (name: string) => {
-    if (name.length >= 3) {
-      setNameComic(name);
-    } else {
-      setNameComic('');
-    }
-  };
+  const handleSearch = (name: string) => setTitleComic(name);
+
+  console.log(debounceTitleComic);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -57,10 +43,10 @@ export function GenericContexProvider({
   return (
     <GenericContext.Provider
       value={{
+        debounceTitleComic,
         handleSelect,
         handleSearch,
         handleSubmit,
-        nameComic,
         comicsSelected,
       }}
     >

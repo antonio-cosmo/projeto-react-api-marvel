@@ -3,7 +3,7 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { ComicSelected } from '../../components/Comic/ComicsSelected';
 import { Map } from '../../components/Map';
 import { GenericContext } from '../../context';
-import { ApiMaps } from '../../services/ApiMaps';
+import { getMap } from '../../services/ApiMaps';
 import { Address, Container, Content, Form, ItemLink, ListCard } from './style';
 
 interface ILocation {
@@ -21,21 +21,25 @@ export function Send() {
   const { comicsSelected, handleSelect } = useContext(GenericContext);
 
   useEffect(() => {
-    ApiMaps.get('json', { params: { address: 'brasil' } }).then((response) => {
+    async function loader() {
+      const response = await getMap();
+
       const [
         {
           geometry: { location },
         },
       ] = response.data.results;
       setLocation(location);
-    });
+    }
+
+    loader();
   }, []);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (!address) return;
 
-    const response = await ApiMaps.get('json', { params: { address } });
+    const response = await getMap(address);
 
     const latLng = response.data.results[0].geometry.location;
     const formatAdrress = response.data.results[0].formatted_address;
@@ -49,17 +53,16 @@ export function Send() {
     setAddress(address);
   };
 
-  const click = (lat: number, lng: number) => {
+  const click = async (lat: number, lng: number) => {
     const clickLocation = { lat, lng };
     setLocation(clickLocation);
     setZoom(zoomOfSearch);
     setMarker(1);
-    ApiMaps.get('json', { params: { latlng: `${lat},${lng}` } }).then(
-      (response) => {
-        const formatAdrress = response.data.results[0].formatted_address;
-        setAddressSend(formatAdrress);
-      }
-    );
+
+    const response = await getMap(`${lat},${lng}`);
+
+    const formatAdrress = response.data.results[0].formatted_address;
+    setAddressSend(formatAdrress);
   };
 
   return (
@@ -80,7 +83,7 @@ export function Send() {
               );
             })
           ) : (
-            <span>Selecione os quadrinos para envio</span>
+            <span>Selecione os quadrinhos para envio</span>
           )}
         </ListCard>
         <Address>

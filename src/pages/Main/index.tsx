@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Comic } from '../../components/Comic';
 import { ModalComic } from '../../components/ModalComic';
 import { GenericContext } from '../../context';
-import { Api } from '../../services/ApiMarvel';
+import { getComics } from '../../services/ApiMarvel';
 import { Container, CardList, Content, Button } from './style';
 
 interface IComic {
@@ -23,25 +23,25 @@ export function Main() {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [modalComicId, setModalComicId] = useState<number>(0);
   const [comics, setComics] = useState<IComic[]>([]);
+  const [nullResonse, setNullResponse] = useState(false);
   const limit = 9;
-  const { nameComic } = useContext(GenericContext);
+  const { debounceTitleComic } = useContext(GenericContext);
 
+  // Responsavel pelo o carregamneto dos quadrinhos quando a pagina é carregada ou quando é feita uma busca
   useEffect(() => {
     async function loader() {
       try {
         let response;
         let results;
 
-        if (nameComic.length !== 0) {
-          response = await Api.get('comics', {
-            params: { limit, titleStartsWith: nameComic },
-          });
+        if (debounceTitleComic.length !== 0) {
+          response = await getComics(limit, debounceTitleComic);
 
           results = response.data.data.results;
 
           setComics(results);
         } else {
-          response = await Api.get('comics', { params: { limit } });
+          response = await getComics(limit);
 
           results = response.data.data.results;
 
@@ -52,18 +52,19 @@ export function Main() {
       }
     }
     loader();
-  }, [nameComic]);
 
+    return () => {
+      console.log('"unmount"');
+    };
+  }, [debounceTitleComic]);
+
+  // Responsavel por carregar mais quadrinhos
   const handleMore = useCallback(async () => {
     try {
-      if (!nameComic) {
+      if (!debounceTitleComic) {
         const limit = comics.length + 9;
 
-        const response = await Api.get('comics', {
-          params: {
-            limit,
-          },
-        });
+        const response = await getComics(limit);
 
         const { results } = response.data.data;
 
@@ -71,12 +72,7 @@ export function Main() {
       } else {
         const limit = comics.length + 9;
 
-        const response = await Api.get('comics', {
-          params: {
-            limit,
-            titleStartsWith: nameComic,
-          },
-        });
+        const response = await getComics(limit, debounceTitleComic);
 
         const { results } = response.data.data;
 
@@ -85,19 +81,35 @@ export function Main() {
     } catch (e) {
       console.log(e);
     }
-  }, [comics, nameComic]);
+  }, [comics, debounceTitleComic]);
 
-  const clickedComic = (id: number) => {
+  // Pega as informações do quadrinho que sera mostrado no modal
+  const clickedComic = useCallback((id: number) => {
     setModalComicId(id);
-  };
+  }, []);
 
-  const handleOpenModal = () => {
+  // Abre o modal
+  const handleOpenModal = useCallback(() => {
     setModalIsOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  // Fecha o modal
+  const handleCloseModal = useCallback(() => {
     setModalIsOpen(false);
-  };
+  }, []);
+
+  // responsavel pela renderização condicional
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!comics.length) {
+        setNullResponse(true);
+      } else {
+        setNullResponse(false);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [comics]);
 
   return (
     <Container>
@@ -108,7 +120,7 @@ export function Main() {
       />
       <Content>
         {!comics.length ? (
-          <p>Carregando informações...</p>
+          nullResonse && <p>Quadrinhos não encontrado</p>
         ) : (
           <>
             <Link to="send">
