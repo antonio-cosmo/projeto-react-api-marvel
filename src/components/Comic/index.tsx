@@ -1,23 +1,14 @@
 import { useContext, useState } from 'react';
 
-import { GenericContext } from '../../context';
+import { ComicContext } from '../../context';
+import { IComic } from '../../types/IComic';
 import { Card } from './style';
 
 interface IComicProps {
   onOpenModal: () => void;
   clickedComic: (id: number) => void;
   index: number;
-  comic: {
-    id: number;
-    title: string;
-    description: string;
-    stories: { items: { name: string }[] };
-    series: { name: string };
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-  };
+  comic: IComic;
 }
 
 export function Comic({
@@ -27,12 +18,12 @@ export function Comic({
   index,
 }: IComicProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { handleSelect } = useContext(GenericContext);
+  const { handleSelect } = useContext(ComicContext);
 
   return (
     <Card imagem={comic.thumbnail}>
       <div
-        id="img"
+        id="imgComic"
         onClick={() => {
           setIsChecked(!isChecked);
           handleSelect(comic);

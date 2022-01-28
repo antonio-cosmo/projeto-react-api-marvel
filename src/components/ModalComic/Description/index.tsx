@@ -1,17 +1,8 @@
+import { IComic } from '../../../types/IComic';
 import { Contain } from './style';
 
 interface IDescriptionProps {
-  comicId: {
-    id: number;
-    title: string;
-    description: string;
-    stories: { items: { name: string }[] };
-    series: { name: string };
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-  };
+  comicId: IComic;
 }
 
 export function Description({ comicId }: IDescriptionProps) {

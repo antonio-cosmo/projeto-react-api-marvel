@@ -9,7 +9,7 @@ const ts = new Date().toString;
 
 const hash = md5(ts + privateKey! + publicKey!);
 
-export const Api = axios.create({
+const Api = axios.create({
   baseURL: 'https://gateway.marvel.com/v1/public',
   params: {
     ts,
@@ -22,6 +22,7 @@ export async function getComics(limit: number, titleStartsWith?: string) {
   const response = await Api.get('comics', {
     params: { limit, titleStartsWith },
   });
+  const { results } = response.data.data;
 
-  return response;
+  return results;
 }

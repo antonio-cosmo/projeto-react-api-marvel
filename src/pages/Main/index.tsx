@@ -3,113 +3,74 @@ import { Link } from 'react-router-dom';
 
 import { Comic } from '../../components/Comic';
 import { ModalComic } from '../../components/ModalComic';
-import { GenericContext } from '../../context';
+import { ComicContext } from '../../context';
 import { getComics } from '../../services/ApiMarvel';
+import { IComic } from '../../types/IComic';
 import { Container, CardList, Content, Button } from './style';
 
-interface IComic {
-  id: number;
-  title: string;
-  description: string;
-  stories: { items: { name: string }[] };
-  series: { name: string };
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-}
-
 export function Main() {
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [modalComicId, setModalComicId] = useState<number>(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalComicId, setModalComicId] = useState(0);
   const [comics, setComics] = useState<IComic[]>([]);
-  const [nullResonse, setNullResponse] = useState(false);
+  const [nullResponse, setNullResponse] = useState(false);
+  const { debounceTitleComic } = useContext(ComicContext);
   const limit = 9;
-  const { debounceTitleComic } = useContext(GenericContext);
+  const newLimit = comics.length + limit;
 
   // Responsavel pelo o carregamneto dos quadrinhos quando a pagina é carregada ou quando é feita uma busca
+
   useEffect(() => {
     async function loader() {
       try {
-        let response;
-        let results;
-
-        if (debounceTitleComic.length !== 0) {
-          response = await getComics(limit, debounceTitleComic);
-
-          results = response.data.data.results;
-
-          setComics(results);
-        } else {
-          response = await getComics(limit);
-
-          results = response.data.data.results;
-
-          setComics(results);
-        }
+        !debounceTitleComic.length
+          ? setComics(await getComics(limit))
+          : setComics(await getComics(limit, debounceTitleComic));
       } catch (e) {
-        console.log(e);
+        console.log('error');
       }
     }
-    loader();
 
-    return () => {
-      console.log('"unmount"');
-    };
+    loader();
+    return () => setComics([]);
   }, [debounceTitleComic]);
 
   // Responsavel por carregar mais quadrinhos
   const handleMore = useCallback(async () => {
     try {
-      if (!debounceTitleComic) {
-        const limit = comics.length + 9;
-
-        const response = await getComics(limit);
-
-        const { results } = response.data.data;
-
-        setComics(results);
-      } else {
-        const limit = comics.length + 9;
-
-        const response = await getComics(limit, debounceTitleComic);
-
-        const { results } = response.data.data;
-
-        setComics(results);
-      }
+      !debounceTitleComic
+        ? setComics(await getComics(newLimit))
+        : setComics(await getComics(newLimit, debounceTitleComic));
     } catch (e) {
-      console.log(e);
+      console.log('error');
     }
   }, [comics, debounceTitleComic]);
 
   // Pega as informações do quadrinho que sera mostrado no modal
-  const clickedComic = useCallback((id: number) => {
-    setModalComicId(id);
-  }, []);
+  const clickedComic = useCallback(
+    (index: number) => setModalComicId(index),
+    []
+  );
 
   // Abre o modal
-  const handleOpenModal = useCallback(() => {
-    setModalIsOpen(true);
-  }, []);
+  const handleOpenModal = useCallback(
+    () => setModalIsOpen(!modalIsOpen),
+    [modalIsOpen]
+  );
 
   // Fecha o modal
-  const handleCloseModal = useCallback(() => {
-    setModalIsOpen(false);
-  }, []);
+  const handleCloseModal = useCallback(
+    () => setModalIsOpen(!modalIsOpen),
+    [modalIsOpen]
+  );
 
-  // responsavel pela renderização condicional
+  // responsavel pela mensagem na renderizacao condicional
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!comics.length) {
-        setNullResponse(true);
-      } else {
-        setNullResponse(false);
-      }
+      comics.length ? setNullResponse(false) : setNullResponse(true);
     }, 1000);
-
     return () => clearTimeout(timer);
-  }, [comics]);
+  }, [comics.length]);
 
   return (
     <Container>
@@ -120,11 +81,11 @@ export function Main() {
       />
       <Content>
         {!comics.length ? (
-          nullResonse && <p>Quadrinhos não encontrado</p>
+          nullResponse && <p id="msg">Quadrinhos não encontrado</p>
         ) : (
           <>
             <Link to="send">
-              <Button id="more" type="button" onClick={handleMore}>
+              <Button type="button" onClick={handleMore}>
                 {' '}
                 Enviar-me{' '}
               </Button>

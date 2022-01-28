@@ -1,30 +1,9 @@
+import { IComic } from '../../../types/IComic';
 import { Card } from './style';
 
 interface IComicProps {
   handleSelect: (comic: IComic) => void;
-  comic: {
-    id: number;
-    title: string;
-    description: string;
-    stories: { items: { name: string }[] };
-    series: { name: string };
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-  };
-}
-
-interface IComic {
-  id: number;
-  title: string;
-  description: string;
-  stories: { items: { name: string }[] };
-  series: { name: string };
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
+  comic: IComic;
 }
 
 export function ComicSelected({ comic, handleSelect }: IComicProps) {

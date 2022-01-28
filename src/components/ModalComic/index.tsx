@@ -1,21 +1,12 @@
 import Modal from 'react-modal';
 
+import { IComic } from '../../types/IComic';
 import { Description } from './Description';
 
 interface IModalComicProps {
   isOpen: boolean;
   onRequestClose(): void;
-  comicId: {
-    id: number;
-    title: string;
-    description: string;
-    stories: { items: { name: string }[] };
-    series: { name: string };
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-  };
+  comicId: IComic;
 }
 
 export function ModalComic({

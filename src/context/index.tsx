@@ -1,24 +1,35 @@
 import { createContext, FormEvent, ReactNode, useState } from 'react';
 
 import { useDebounceInput } from '../hooks/useDebounceInput';
-import { IComic, IGenericContextData } from './type';
+import { IComic } from '../types/IComic';
 
-interface IGenericContextProviderProps {
+interface IComicContextProviderProps {
   children: ReactNode;
 }
 
-export const GenericContext = createContext<IGenericContextData>(
-  {} as IGenericContextData
+export interface IComicContextData {
+  debounceTitleComic: string;
+  handleSubmit: (event: FormEvent) => void;
+  handleSearch: (name: string) => void;
+  handleSelect: (comic: IComic) => void;
+  comicsSelected: IComic[];
+}
+
+export const ComicContext = createContext<IComicContextData>(
+  {} as IComicContextData
 );
 
-export function GenericContexProvider({
-  children,
-}: IGenericContextProviderProps) {
+export function ComicContexProvider({ children }: IComicContextProviderProps) {
   const [titleComic, setTitleComic] = useState('');
-
   const [comicsSelected, setComicsSelected] = useState<IComic[]>([]);
 
   const debounceTitleComic = useDebounceInput(titleComic, 300);
+
+  const handleSearch = (name: string) => setTitleComic(name);
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+  };
 
   const handleSelect = (comic: IComic) => {
     const auxComicsSelected = comicsSelected.filter(
@@ -32,16 +43,8 @@ export function GenericContexProvider({
     }
   };
 
-  const handleSearch = (name: string) => setTitleComic(name);
-
-  console.log(debounceTitleComic);
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-  };
-
   return (
-    <GenericContext.Provider
+    <ComicContext.Provider
       value={{
         debounceTitleComic,
         handleSelect,
@@ -51,6 +54,6 @@ export function GenericContexProvider({
       }}
     >
       {children}
-    </GenericContext.Provider>
+    </ComicContext.Provider>
   );
 }

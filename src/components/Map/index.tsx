@@ -6,11 +6,12 @@ interface IMapComponentProps {
     lat: number;
     lng: number;
   };
-  click: (lat: number, lng: number) => void;
+  clickMap: (lat: number, lng: number) => void;
   zoom: number;
   marker: number;
 }
-export function Map({ location, zoom, marker, click }: IMapComponentProps) {
+
+export function Map({ location, zoom, marker, clickMap }: IMapComponentProps) {
   const key = process.env.REACT_APP_GOOGLE_KEY;
   const styleMap = {
     maxWidth: '1020px',
@@ -31,7 +32,7 @@ export function Map({ location, zoom, marker, click }: IMapComponentProps) {
       onClick={(e) => {
         const lat = e.latLng?.lat();
         const lng = e.latLng?.lng();
-        click(lat!, lng!);
+        clickMap(lat!, lng!);
       }}
     >
       {marker ? <Marker position={location} /> : <></>}

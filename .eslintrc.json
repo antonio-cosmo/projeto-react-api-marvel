@@ -101,10 +101,11 @@
       ],
       "react/jsx-no-useless-fragment": "off",
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/exhaustive-deps": "off",
       "react/jsx-no-constructed-context-values":"off",
       "@typescript-eslint/no-non-null-assertion":"off",
-      "default-param-last":"off"
+      "default-param-last":"off",
+      "no-unused-expressions":"off"
   },
   "settings": {
       "import/resolver": {

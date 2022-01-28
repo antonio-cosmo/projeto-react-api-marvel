@@ -16,7 +16,7 @@ export const Card = styled.li`
   transition: all 300ms ease-in-out;
   margin-bottom: 2rem;
 
-  div#img {
+  div#imgComic {
     width: 100%;
     height: 300px;
     background: url(${urlImg}) no-repeat center;
@@ -67,7 +67,7 @@ export const Card = styled.li`
     &:hover {
       transform: translate(1%) scale(1.05);
     }
-    div#img {
+    div#imgComic {
       height: 250px;
     }
   }
@@ -78,7 +78,7 @@ export const Card = styled.li`
     &:hover {
       transform: translate(1%) scale(1.05);
     }
-    div#img {
+    div#imgComic {
       height: 300px;
     }
   }
@@ -89,7 +89,7 @@ export const Card = styled.li`
     &:hover {
       transform: translate(1%) scale(1.05);
     }
-    div#img {
+    div#imgComic {
       height: 250px;
     }
   }
@@ -99,7 +99,7 @@ export const Card = styled.li`
     &:hover {
       transform: translate(1%) scale(1.05);
     }
-    div#img {
+    div#imgComic {
       height: 200px;
     }
   }
@@ -109,7 +109,7 @@ export const Card = styled.li`
     &:hover {
       transform: translate(1%) scale(1.05);
     }
-    div#img {
+    div#imgComic {
       height: 130px;
     }
   }

@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { Main } from '../pages/Main';
-import { Page404 } from '../pages/Page404';
+import { NotFound } from '../pages/NotFound';
 import { Send } from '../pages/Send';
 
 export function Routers() {
@@ -9,7 +9,7 @@ export function Routers() {
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="send" element={<Send />} />
-      <Route path="*" element={<Page404 />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 
 import { ComicSelected } from '../../components/Comic/ComicsSelected';
 import { Map } from '../../components/Map';
-import { GenericContext } from '../../context';
+import { ComicContext } from '../../context';
 import { getMap } from '../../services/ApiMaps';
 import { Address, Container, Content, Form, ItemLink, ListCard } from './style';
 
@@ -18,7 +18,7 @@ export function Send() {
   const [zoom, setZoom] = useState(4);
   const [marker, setMarker] = useState(0);
   const zoomOfSearch = 16;
-  const { comicsSelected, handleSelect } = useContext(GenericContext);
+  const { comicsSelected, handleSelect } = useContext(ComicContext);
 
   useEffect(() => {
     async function loader() {
@@ -104,7 +104,7 @@ export function Send() {
         />
         <button type="submit">Buscar</button>
       </Form>
-      <Map click={click} marker={marker} location={location} zoom={zoom} />
+      <Map clickMap={click} marker={marker} location={location} zoom={zoom} />
     </Container>
   );
 }

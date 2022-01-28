@@ -32,6 +32,11 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
 
+  #msg {
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
   @media (min-width: 650px) and (max-width: 879px) {
     max-width: 650px;
   }
