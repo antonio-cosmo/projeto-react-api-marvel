@@ -22,7 +22,16 @@ export async function getComics(limit: number, titleStartsWith?: string) {
   const response = await Api.get('comics', {
     params: { limit, titleStartsWith },
   });
-  const { results } = response.data.data;
+  const { results, total } = response.data.data;
 
-  return results;
+  return [results, total];
+}
+
+export async function getCharacters(offset: number, nameStartsWith?: string) {
+  const response = await Api.get('characters', {
+    params: { offset, limit: 9, nameStartsWith },
+  });
+  const { results, total } = response.data.data;
+
+  return [results, total];
 }

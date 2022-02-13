@@ -1,8 +1,8 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { ComicSelected } from '../../components/Comic/ComicsSelected';
+import { ComicSelected } from '../../components/Character/CharactersSelected';
 import { Map } from '../../components/Map';
-import { ComicContext } from '../../context';
+import { CharacterContext } from '../../context';
 import { getMap } from '../../services/ApiMaps';
 import { Address, Container, Content, Form, ItemLink, ListCard } from './style';
 
@@ -18,7 +18,7 @@ export function Send() {
   const [zoom, setZoom] = useState(4);
   const [marker, setMarker] = useState(0);
   const zoomOfSearch = 16;
-  const { comicsSelected, handleSelect } = useContext(ComicContext);
+  const { charactersSelected, handleSelect } = useContext(CharacterContext);
 
   useEffect(() => {
     async function loader() {
@@ -72,12 +72,12 @@ export function Send() {
       </ItemLink>
       <Content>
         <ListCard>
-          {comicsSelected.length !== 0 ? (
-            comicsSelected.map((comic) => {
+          {charactersSelected.length !== 0 ? (
+            charactersSelected.map((character) => {
               return (
                 <ComicSelected
-                  key={comic.id}
-                  comic={comic}
+                  key={character.id}
+                  character={character}
                   handleSelect={handleSelect}
                 />
               );

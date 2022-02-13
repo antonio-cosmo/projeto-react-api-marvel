@@ -1,32 +1,32 @@
 import { useContext, useState } from 'react';
 
-import { ComicContext } from '../../context';
-import { IComic } from '../../types/IComic';
+import { CharacterContext } from '../../context';
+import { ICharacter } from '../../types/ICharacter';
 import { Card } from './style';
 
 interface IComicProps {
   onOpenModal: () => void;
-  clickedComic: (id: number) => void;
+  clickedCharacter: (id: number) => void;
   index: number;
-  comic: IComic;
+  character: ICharacter;
 }
 
-export function Comic({
-  comic,
+export function Character({
+  character,
   onOpenModal,
-  clickedComic,
+  clickedCharacter,
   index,
 }: IComicProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { handleSelect } = useContext(ComicContext);
+  const { handleSelect } = useContext(CharacterContext);
 
   return (
-    <Card imagem={comic.thumbnail}>
+    <Card imagem={character.thumbnail}>
       <div
         id="imgComic"
         onClick={() => {
           setIsChecked(!isChecked);
-          handleSelect(comic);
+          handleSelect(character);
         }}
         aria-hidden="true"
       >
@@ -39,13 +39,13 @@ export function Comic({
         type="button"
         onClick={() => {
           onOpenModal();
-          clickedComic(index);
+          clickedCharacter(index);
         }}
       >
         Detalhes
       </button>
 
-      <p>{comic.title}</p>
+      <p>{character.name}</p>
     </Card>
   );
 }

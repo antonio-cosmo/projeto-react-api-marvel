@@ -1,53 +1,69 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Comic } from '../../components/Comic';
-import { ModalComic } from '../../components/ModalComic';
-import { ComicContext } from '../../context';
-import { getComics } from '../../services/ApiMarvel';
-import { IComic } from '../../types/IComic';
+import { Character } from '../../components/Character';
+import { ModalCharacter } from '../../components/ModalCharacter';
+import { CharacterContext } from '../../context';
+import { getCharacters } from '../../services/ApiMarvel';
+import { ICharacter } from '../../types/ICharacter';
 import { Container, CardList, Content, Button } from './style';
 
 export function Main() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalComicId, setModalComicId] = useState(0);
-  const [comics, setComics] = useState<IComic[]>([]);
+  const [modalCharacterId, setModalCharacterId] = useState(0);
+  const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [total, setTotal] = useState(0);
   const [nullResponse, setNullResponse] = useState(false);
-  const { debounceTitleComic } = useContext(ComicContext);
-  const limit = 9;
-  const newLimit = comics.length + limit;
+  const { debounceNameCharacter } = useContext(CharacterContext);
+  const offset = 0;
+  // const newLimit = comics.length + limit;
 
   // Responsavel pelo o carregamneto dos quadrinhos quando a pagina é carregada ou quando é feita uma busca
 
   useEffect(() => {
     async function loader() {
       try {
-        !debounceTitleComic.length
-          ? setComics(await getComics(limit))
-          : setComics(await getComics(limit, debounceTitleComic));
+        let results;
+        let total;
+        if (!debounceNameCharacter.length) {
+          [results, total] = await getCharacters(offset);
+        } else {
+          [results, total] = await getCharacters(offset, debounceNameCharacter);
+        }
+        setCharacters(results);
+        setTotal(total);
       } catch (e) {
         console.log('error');
       }
     }
 
     loader();
-    return () => setComics([]);
-  }, [debounceTitleComic]);
+    return () => setCharacters([]);
+  }, [debounceNameCharacter]);
 
   // Responsavel por carregar mais quadrinhos
   const handleMore = useCallback(async () => {
     try {
-      !debounceTitleComic
-        ? setComics(await getComics(newLimit))
-        : setComics(await getComics(newLimit, debounceTitleComic));
+      let results;
+      let total;
+      if (!debounceNameCharacter.length) {
+        [results, total] = await getCharacters(characters.length);
+      } else {
+        [results, total] = await getCharacters(
+          characters.length,
+          debounceNameCharacter
+        );
+      }
+      setCharacters([...characters, ...results]);
+      setTotal(total);
     } catch (e) {
       console.log('error');
     }
-  }, [comics, debounceTitleComic]);
+  }, [characters, debounceNameCharacter]);
 
   // Pega as informações do quadrinho que sera mostrado no modal
-  const clickedComic = useCallback(
-    (index: number) => setModalComicId(index),
+  const clickedCharacter = useCallback(
+    (index: number) => setModalCharacterId(index),
     []
   );
 
@@ -67,21 +83,21 @@ export function Main() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      comics.length ? setNullResponse(false) : setNullResponse(true);
+      characters.length ? setNullResponse(false) : setNullResponse(true);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [comics.length]);
+  }, [characters.length]);
 
   return (
     <Container>
-      <ModalComic
+      <ModalCharacter
         isOpen={modalIsOpen}
         onRequestClose={handleCloseModal}
-        comicId={comics[modalComicId]}
+        characterId={characters[modalCharacterId]}
       />
       <Content>
-        {!comics.length ? (
-          nullResponse && <p id="msg">Quadrinhos não encontrado</p>
+        {!characters.length ? (
+          nullResponse && <p id="msg">Personagem não encontrado</p>
         ) : (
           <>
             <Link to="send">
@@ -91,23 +107,25 @@ export function Main() {
               </Button>
             </Link>
             <CardList>
-              {comics.map((comic: IComic, index: number) => {
+              {characters.map((comic: ICharacter, index: number) => {
                 return (
-                  <Comic
+                  <Character
                     key={comic.id}
-                    comic={comic}
+                    character={comic}
                     onOpenModal={handleOpenModal}
-                    clickedComic={clickedComic}
+                    clickedCharacter={clickedCharacter}
                     index={index}
                   />
                 );
               })}
             </CardList>
-
-            <Button id="more" type="button" onClick={handleMore}>
-              {' '}
-              Carregar mais{' '}
-            </Button>
+            {total === characters.length ? (
+              <></>
+            ) : (
+              <Button id="more" type="button" onClick={handleMore}>
+                Carregar mais
+              </Button>
+            )}
           </>
         )}
       </Content>

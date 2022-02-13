@@ -27,8 +27,6 @@
       "react-hooks"
   ],
   "rules": {
-      "camelcase": "off",
-      "import/no-unresolved": "error",
       "@typescript-eslint/naming-convention": [
           "error",
           {
@@ -42,7 +40,6 @@
               }
           }
       ],
-      "class-methods-use-this": "off",
       "import/prefer-default-export": "off",
       "no-shadow": "off",
       "no-console": "off",

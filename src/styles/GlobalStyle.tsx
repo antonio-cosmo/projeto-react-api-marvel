@@ -34,13 +34,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .react-modal-content{
-    width: 700px;
+    width: 800px;
     background-color: #202020 ;
     color: #ffffff;
     border-radius: 5px;
-    @media (min-width: 880px){
-      width: 550px;
-    }
+    /* @media (min-width: 880px){
+      width: 700px;
+    } */
     @media (min-width: 650px) and (max-width:879px){
       width: 480px;
     }

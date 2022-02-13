@@ -1,9 +1,9 @@
-export interface IComic {
+export interface ICharacter {
   id: number;
-  title: string;
+  name: string;
   description: string;
   stories: { items: { name: string }[] };
-  series: { name: string };
+  series: { items: { name: string }[] };
   thumbnail: {
     path: string;
     extension: string;

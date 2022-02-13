@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { ComicContext } from '../../context';
+import { CharacterContext } from '../../context';
 import { Container, Contain, Form, ItemLink } from './style';
 
 export function Header() {
-  const { handleSubmit, handleSearch } = useContext(ComicContext);
+  const { handleSubmit, handleSearch } = useContext(CharacterContext);
   return (
     <Container>
       <Contain>

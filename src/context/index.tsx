@@ -1,59 +1,63 @@
 import { createContext, FormEvent, ReactNode, useState } from 'react';
 
 import { useDebounceInput } from '../hooks/useDebounceInput';
-import { IComic } from '../types/IComic';
+import { ICharacter } from '../types/ICharacter';
 
-interface IComicContextProviderProps {
+interface ICharacterContextProviderProps {
   children: ReactNode;
 }
 
-export interface IComicContextData {
-  debounceTitleComic: string;
+export interface ICharacterContextData {
+  debounceNameCharacter: string;
   handleSubmit: (event: FormEvent) => void;
   handleSearch: (name: string) => void;
-  handleSelect: (comic: IComic) => void;
-  comicsSelected: IComic[];
+  handleSelect: (character: ICharacter) => void;
+  charactersSelected: ICharacter[];
 }
 
-export const ComicContext = createContext<IComicContextData>(
-  {} as IComicContextData
+export const CharacterContext = createContext<ICharacterContextData>(
+  {} as ICharacterContextData
 );
 
-export function ComicContexProvider({ children }: IComicContextProviderProps) {
-  const [titleComic, setTitleComic] = useState('');
-  const [comicsSelected, setComicsSelected] = useState<IComic[]>([]);
+export function CharacterContexProvider({
+  children,
+}: ICharacterContextProviderProps) {
+  const [nameCharacter, setNameCharacter] = useState('');
+  const [charactersSelected, setCharactersSelected] = useState<ICharacter[]>(
+    []
+  );
 
-  const debounceTitleComic = useDebounceInput(titleComic, 300);
+  const debounceNameCharacter = useDebounceInput(nameCharacter, 300);
 
-  const handleSearch = (name: string) => setTitleComic(name);
+  const handleSearch = (name: string) => setNameCharacter(name);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
   };
 
-  const handleSelect = (comic: IComic) => {
-    const auxComicsSelected = comicsSelected.filter(
-      (value) => value.id !== comic.id
+  const handleSelect = (character: ICharacter) => {
+    const auxCharactersSelected = charactersSelected.filter(
+      (value) => value.id !== character.id
     );
 
-    if (comicsSelected.length > auxComicsSelected.length) {
-      setComicsSelected(auxComicsSelected);
+    if (charactersSelected.length > auxCharactersSelected.length) {
+      setCharactersSelected(auxCharactersSelected);
     } else {
-      setComicsSelected([...comicsSelected, comic]);
+      setCharactersSelected([...charactersSelected, character]);
     }
   };
 
   return (
-    <ComicContext.Provider
+    <CharacterContext.Provider
       value={{
-        debounceTitleComic,
+        debounceNameCharacter,
         handleSelect,
         handleSearch,
         handleSubmit,
-        comicsSelected,
+        charactersSelected,
       }}
     >
       {children}
-    </ComicContext.Provider>
+    </CharacterContext.Provider>
   );
 }
