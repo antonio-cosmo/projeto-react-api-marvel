@@ -1,11 +1,16 @@
+import closeImg from '../../../assets/close.svg';
 import { ICharacter } from '../../../types/ICharacter';
 import { Contain } from './style';
 
 interface IDescriptionProps {
   characterId: ICharacter;
+  onRequestClose: () => void;
 }
 
-export function Description({ characterId }: IDescriptionProps) {
+export function Description({
+  characterId,
+  onRequestClose,
+}: IDescriptionProps) {
   return (
     <Contain imagem={characterId.thumbnail}>
       <div id="img" />
@@ -29,6 +34,9 @@ export function Description({ characterId }: IDescriptionProps) {
             ))
           : 'Sem descrição'}
       </div>
+      <button type="button" onClick={onRequestClose} className="closeModal">
+        <img src={closeImg} alt="Fechar modal" />
+      </button>
     </Contain>
   );
 }

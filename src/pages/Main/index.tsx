@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Character } from '../../components/Character';
+import { Loading } from '../../components/Loading';
 import { ModalCharacter } from '../../components/ModalCharacter';
 import { CharacterContext } from '../../context';
 import { getCharacters } from '../../services/ApiMarvel';
@@ -13,10 +14,9 @@ export function Main() {
   const [modalCharacterId, setModalCharacterId] = useState(0);
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [total, setTotal] = useState(0);
-  const [nullResponse, setNullResponse] = useState(false);
+  const [removeLoading, setRemoveLoading] = useState(false);
   const { debounceNameCharacter } = useContext(CharacterContext);
   const offset = 0;
-  // const newLimit = comics.length + limit;
 
   // Responsavel pelo o carregamneto dos quadrinhos quando a pagina é carregada ou quando é feita uma busca
 
@@ -32,13 +32,17 @@ export function Main() {
         }
         setCharacters(results);
         setTotal(total);
+        setRemoveLoading(true);
       } catch (e) {
         console.log('error');
       }
     }
 
     loader();
-    return () => setCharacters([]);
+    return () => {
+      setCharacters([]);
+      setRemoveLoading(false);
+    };
   }, [debounceNameCharacter]);
 
   // Responsavel por carregar mais quadrinhos
@@ -79,15 +83,6 @@ export function Main() {
     [modalIsOpen]
   );
 
-  // responsavel pela mensagem na renderizacao condicional
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      characters.length ? setNullResponse(false) : setNullResponse(true);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [characters.length]);
-
   return (
     <Container>
       <ModalCharacter
@@ -96,9 +91,7 @@ export function Main() {
         characterId={characters[modalCharacterId]}
       />
       <Content>
-        {!characters.length ? (
-          nullResponse && <p id="msg">Personagem não encontrado</p>
-        ) : (
+        {characters.length > 0 && (
           <>
             <Link to="send">
               <Button type="button" onClick={handleMore}>
@@ -127,6 +120,10 @@ export function Main() {
               </Button>
             )}
           </>
+        )}
+        {!removeLoading && <Loading />}
+        {removeLoading && characters.length === 0 && (
+          <p id="msg">Personagem não encontrado</p>
         )}
       </Content>
     </Container>

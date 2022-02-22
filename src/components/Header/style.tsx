@@ -72,6 +72,9 @@ export const Form = styled.form`
 
 export const ItemLink = styled(Link)`
   text-decoration: none;
+  img {
+    width: 100px;
+  }
   @media (max-width: 649px) {
     h1 {
       font-size: 28px;

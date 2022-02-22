@@ -30,7 +30,6 @@ export const Card = styled.li`
         height: 20px;
         width: 20px;
         cursor: pointer;
-
         &:not(:checked) {
           display: none;
         }

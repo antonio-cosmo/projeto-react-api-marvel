@@ -44,15 +44,14 @@ export const Contain = styled.div`
   }
 
   .closeModal {
-    background-color: transparent;
-    border: none;
     position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 99;
-
-    img {
-      width: 40px;
+    right: 0.8rem;
+    top: 0.8rem;
+    border: none;
+    background: transparent;
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.8);
     }
   }
 
@@ -71,12 +70,6 @@ export const Contain = styled.div`
         & + h3 {
           margin-top: 0.6rem;
         }
-      }
-    }
-
-    .closeModal {
-      img {
-        width: 30px;
       }
     }
   }

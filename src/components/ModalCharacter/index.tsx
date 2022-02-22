@@ -21,7 +21,7 @@ export function ModalCharacter({
       className="react-modal-content"
       overlayClassName="react-modal-overlay"
     >
-      <Description characterId={characterId} />
+      <Description characterId={characterId} onRequestClose={onRequestClose} />
     </Modal>
   );
 }
