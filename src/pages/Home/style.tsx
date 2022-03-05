@@ -6,7 +6,7 @@ export const Container = styled.main`
   padding: 2.4rem 1rem;
   margin-top: 6rem;
 
-  @media (min-width: 880px) {
+  @media (max-width: 880px) {
     max-width: 860px;
   }
 

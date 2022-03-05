@@ -19,15 +19,12 @@ export const Contain = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  /* img {
-    width: 100px;
-  } */
   h1 {
     color: red;
     font-weight: 700;
   }
 
-  @media (min-width: 880px) {
+  @media (max-width: 880px) {
     max-width: 860px;
   }
 
@@ -47,7 +44,7 @@ export const Contain = styled.div`
   }
 `;
 
-export const Form = styled.form`
+export const Search = styled.form`
   input {
     padding: 0.6rem;
     width: 18rem;

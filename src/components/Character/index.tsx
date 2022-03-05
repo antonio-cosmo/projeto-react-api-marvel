@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { CharacterContext } from '../../context';
-import { ICharacter } from '../../types/ICharacter';
+import { useCharacters } from '../../hooks/useCharacters';
+import { ICharacter } from '../../types';
 import { Card } from './style';
 
-interface IComicProps {
+interface ICharacterProps {
   onOpenModal: () => void;
   clickedCharacter: (id: number) => void;
-  index: number;
   character: ICharacter;
+  index: number;
 }
 
 export function Character({
@@ -16,9 +16,9 @@ export function Character({
   onOpenModal,
   clickedCharacter,
   index,
-}: IComicProps) {
+}: ICharacterProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { handleSelect } = useContext(CharacterContext);
+  const { handleSelect } = useCharacters();
 
   return (
     <Card imagem={character.thumbnail}>

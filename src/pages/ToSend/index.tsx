@@ -1,8 +1,8 @@
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
-import { ComicSelected } from '../../components/Character/CharactersSelected';
+import { CharacterSelected } from '../../components/CharactersSelected';
 import { Map } from '../../components/Map';
-import { CharacterContext } from '../../context';
+import { useCharacters } from '../../hooks/useCharacters';
 import { getMap } from '../../services/ApiMaps';
 import { Address, Container, Content, Form, ItemLink, ListCard } from './style';
 
@@ -11,15 +11,14 @@ interface ILocation {
   lng: number;
 }
 
-export function Send() {
+export function ToSend() {
   const [location, setLocation] = useState<ILocation>({ lat: 0, lng: 0 });
   const [address, setAddress] = useState('');
   const [addressSend, setAddressSend] = useState('');
   const [zoom, setZoom] = useState(4);
-  const [marker, setMarker] = useState(0);
+  const [marker, setMarker] = useState(false);
   const zoomOfSearch = 16;
-  const { charactersSelected, handleSelect } = useContext(CharacterContext);
-
+  const { selectedCharacters, handleRemove } = useCharacters();
   useEffect(() => {
     async function loader() {
       const response = await getMap();
@@ -28,7 +27,7 @@ export function Send() {
         {
           geometry: { location },
         },
-      ] = response.data.results;
+      ] = response.results;
       setLocation(location);
     }
 
@@ -40,13 +39,13 @@ export function Send() {
     if (!address) return;
 
     const response = await getMap(address);
-
-    const latLng = response.data.results[0].geometry.location;
-    const formatAdrress = response.data.results[0].formatted_address;
+    console.log(response.results[0].formatted_address);
+    const latLng = response.results[0].geometry.location;
+    const formatAdrress = response.results[0].formatted_address;
     setAddressSend(formatAdrress);
     setLocation(latLng);
     setZoom(zoomOfSearch);
-    setMarker(1);
+    setMarker(true);
   };
 
   const handleSearch = (address: string) => {
@@ -57,11 +56,11 @@ export function Send() {
     const clickLocation = { lat, lng };
     setLocation(clickLocation);
     setZoom(zoomOfSearch);
-    setMarker(1);
+    setMarker(true);
 
     const response = await getMap(`${lat},${lng}`);
 
-    const formatAdrress = response.data.results[0].formatted_address;
+    const formatAdrress = response.results[0].formatted_address;
     setAddressSend(formatAdrress);
   };
 
@@ -72,13 +71,13 @@ export function Send() {
       </ItemLink>
       <Content>
         <ListCard>
-          {charactersSelected.length !== 0 ? (
-            charactersSelected.map((character) => {
+          {selectedCharacters.length !== 0 ? (
+            selectedCharacters.map((character) => {
               return (
-                <ComicSelected
+                <CharacterSelected
                   key={character.id}
                   character={character}
-                  handleSelect={handleSelect}
+                  handleRemove={handleRemove}
                 />
               );
             })

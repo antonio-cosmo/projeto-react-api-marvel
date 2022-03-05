@@ -6,13 +6,16 @@ interface IMapComponentProps {
     lat: number;
     lng: number;
   };
-  clickMap: (lat: number, lng: number) => void;
+  clickMap: (lat: number, lng: number) => Promise<void>;
   zoom: number;
-  marker: number;
+  marker: boolean;
 }
 
 export function Map({ location, zoom, marker, clickMap }: IMapComponentProps) {
-  const key = process.env.REACT_APP_GOOGLE_KEY;
+  let key = '';
+  if (process.env.REACT_APP_GOOGLE_KEY) {
+    key = process.env.REACT_APP_GOOGLE_KEY;
+  }
   const styleMap = {
     maxWidth: '1020px',
     height: '400px',
@@ -21,7 +24,7 @@ export function Map({ location, zoom, marker, clickMap }: IMapComponentProps) {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: String(key),
+    googleMapsApiKey: key,
   });
 
   return isLoaded ? (

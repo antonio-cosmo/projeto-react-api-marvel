@@ -12,5 +12,5 @@ export const ApiMaps = axios.create({
 export async function getMap(address = 'brasil', latlng?: string) {
   const response = await ApiMaps.get('json', { params: { address, latlng } });
 
-  return response;
+  return response.data;
 }

@@ -7,25 +7,13 @@ interface IUrlImageProps {
   };
 }
 const urlImg = ({ imagem }: IUrlImageProps) =>
-  `${imagem.path}.${imagem.extension}`;
+  `${imagem.path.replace(/http/, 'https')}.${imagem.extension}`;
 
 export const Contain = styled.div`
   display: flex;
   width: 100%;
   height: 600px;
-  overflow: auto;
   position: relative;
-  &::-webkit-scrollbar-track {
-    background-color: #f4f4f4;
-  }
-  &::-webkit-scrollbar {
-    width: 9px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #acaaaa;
-    border-radius: 5px;
-  }
-
   div#img {
     background: url(${urlImg}) no-repeat center;
     background-size: cover;
@@ -35,11 +23,24 @@ export const Contain = styled.div`
   div#infor {
     width: 60%;
     padding: 1rem;
+    overflow: auto;
+    &::-webkit-scrollbar-track {
+      background-color: #f4f4f4;
+    }
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #acaaaa;
+      border-radius: 5px;
+    }
 
-    p {
-      & + h3 {
-        margin-top: 1rem;
-      }
+    h3 + p {
+      margin-top: 0.5rem;
+    }
+
+    p + h3 {
+      margin-top: 1rem;
     }
   }
 
@@ -66,10 +67,11 @@ export const Contain = styled.div`
       /* width: 500px; */
       padding: 1rem;
 
-      p {
-        & + h3 {
-          margin-top: 0.6rem;
-        }
+      h3 + p {
+        margin-top: 0.6rem;
+      }
+      p + h3 {
+        margin-top: 0.6rem;
       }
     }
   }
@@ -85,16 +87,17 @@ export const Contain = styled.div`
       /* width: 200px; */
       padding: 1rem;
 
-      p {
-        & + h3 {
-          margin-top: 0.6rem;
-        }
+      h3 + p {
+        margin-top: 0.6rem;
+      }
+      p + h3 {
+        margin-top: 0.6rem;
       }
     }
 
     .closeModal {
       img {
-        width: 30px;
+        width: 14px;
       }
     }
   }
@@ -110,16 +113,18 @@ export const Contain = styled.div`
       /* width: 200px; */
       padding: 1rem;
 
-      p {
-        & + h3 {
-          margin-top: 0.6rem;
-        }
+      h3 + p {
+        margin-top: 0.3rem;
+      }
+
+      p + h3 {
+        margin-top: 0.6rem;
       }
     }
 
     .closeModal {
       img {
-        width: 25px;
+        width: 12px;
       }
     }
   }
@@ -135,16 +140,18 @@ export const Contain = styled.div`
       /* width: 100px; */
       padding: 1rem;
 
-      p {
-        & + h3 {
-          margin-top: 0.6rem;
-        }
+      h3 + p {
+        margin-top: 0.3rem;
+      }
+
+      p + h3 {
+        margin-top: 0.6rem;
       }
     }
 
     .closeModal {
       img {
-        width: 20px;
+        width: 10px;
       }
     }
   }
@@ -153,25 +160,23 @@ export const Contain = styled.div`
     height: 150px;
     div#img {
       display: none;
-      margin: 1rem;
+      /* margin: 1rem; */
     }
     div#infor {
+      width: 100%;
       padding: 1rem;
-
-      p {
-        margin-top: 0.6rem;
+      h3 + p {
+        margin-top: 0.3rem;
       }
 
-      p {
-        & + h3 {
-          margin-top: 0.6rem;
-        }
+      p + h3 {
+        margin-top: 0.6rem;
       }
     }
 
     .closeModal {
       img {
-        width: 20px;
+        width: 8px;
       }
     }
   }

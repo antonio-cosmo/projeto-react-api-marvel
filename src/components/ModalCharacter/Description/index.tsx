@@ -1,42 +1,47 @@
 import closeImg from '../../../assets/close.svg';
-import { ICharacter } from '../../../types/ICharacter';
+import { ICharacter } from '../../../types';
 import { Contain } from './style';
 
 interface IDescriptionProps {
-  characterId: ICharacter;
+  characterInfor: ICharacter;
   onRequestClose: () => void;
 }
 
 export function Description({
-  characterId,
+  characterInfor,
   onRequestClose,
 }: IDescriptionProps) {
   return (
-    <Contain imagem={characterId.thumbnail}>
-      <div id="img" />
+    <>
+      {characterInfor.name && (
+        <Contain imagem={characterInfor.thumbnail}>
+          <div id="img" />
 
-      <div id="infor">
-        <h3>{characterId.name}</h3>
-        <p>
-          {characterId.description ? characterId.description : 'Sem descrição'}
-        </p>
-
-        <h3>Historias:</h3>
-        {characterId.stories.items.length > 0
-          ? characterId.stories.items.map((historia) => (
-              <p key={historia.name}>{historia.name}</p>
-            ))
-          : 'Sem descrição'}
-        <h3>Series:</h3>
-        {characterId.series.items.length > 0
-          ? characterId.series.items.map((serie) => (
-              <p key={serie.name}>{serie.name}</p>
-            ))
-          : 'Sem descrição'}
-      </div>
-      <button type="button" onClick={onRequestClose} className="closeModal">
-        <img src={closeImg} alt="Fechar modal" />
-      </button>
-    </Contain>
+          <div id="infor">
+            <h3>{characterInfor.name}</h3>
+            <p>
+              {characterInfor.description
+                ? characterInfor.description
+                : 'Sem descrição'}
+            </p>
+            <h3>Historias:</h3>
+            {characterInfor.stories.items.length > 0
+              ? characterInfor.stories.items.map((historia, index) => (
+                  <p key={index}>{historia.name}</p>
+                ))
+              : 'Sem descrição'}
+            <h3>Series:</h3>
+            {characterInfor.series.items.length > 0
+              ? characterInfor.series.items.map((serie, index) => (
+                  <p key={index}>{serie.name}</p>
+                ))
+              : 'Sem descrição'}
+          </div>
+          <button type="button" onClick={onRequestClose} className="closeModal">
+            <img src={closeImg} alt="Fechar modal" />
+          </button>
+        </Contain>
+      )}
+    </>
   );
 }

@@ -6,7 +6,8 @@ interface IUrlImage {
     extension: string;
   };
 }
-const urlImg = ({ imagem }: IUrlImage) => `${imagem.path}.${imagem.extension}`;
+const urlImg = ({ imagem }: IUrlImage) =>
+  `${imagem.path.replace(/http/, 'https')}.${imagem.extension}`;
 
 export const Card = styled.li`
   width: 240px;

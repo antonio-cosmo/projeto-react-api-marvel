@@ -1,18 +1,19 @@
 import Modal from 'react-modal';
 
-import { ICharacter } from '../../types/ICharacter';
+import { ICharacter } from '../../types';
 import { Description } from './Description';
 
 interface IModalComicProps {
   isOpen: boolean;
   onRequestClose(): void;
-  characterId: ICharacter;
+  characterInfor: ICharacter;
+  // characterId: number;
 }
 
 export function ModalCharacter({
   isOpen,
   onRequestClose,
-  characterId,
+  characterInfor,
 }: IModalComicProps) {
   return (
     <Modal
@@ -21,7 +22,10 @@ export function ModalCharacter({
       className="react-modal-content"
       overlayClassName="react-modal-overlay"
     >
-      <Description characterId={characterId} onRequestClose={onRequestClose} />
+      <Description
+        characterInfor={characterInfor}
+        onRequestClose={onRequestClose}
+      />
     </Modal>
   );
 }
