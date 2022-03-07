@@ -40,7 +40,7 @@ export function Home() {
       <Content>
         {characters.length > 0 && (
           <>
-            <Link to="send">
+            <Link to="tosend">
               <Button type="button" onClick={handleMore}>
                 Enviar-me
               </Button>

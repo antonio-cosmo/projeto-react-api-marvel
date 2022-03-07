@@ -103,7 +103,8 @@
       "@typescript-eslint/no-non-null-assertion":"off",
       "default-param-last":"off",
       "no-unused-expressions":"off",
-      "react/no-array-index-key": "off"
+      "react/no-array-index-key": "off",
+      "jsx-a11y/label-has-associated-control": "off"
   },
   "settings": {
       "import/resolver": {

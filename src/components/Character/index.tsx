@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useCharacters } from '../../hooks/useCharacters';
 import { ICharacter } from '../../types';
@@ -18,8 +18,15 @@ export function Character({
   index,
 }: ICharacterProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { handleSelect } = useCharacters();
+  const { handleSelect, selectedCharacters } = useCharacters();
 
+  useEffect(() => {
+    const characterSelectedIndex = selectedCharacters.findIndex(
+      (element) => element.id === character.id
+    );
+
+    if (characterSelectedIndex >= 0) setIsChecked(true);
+  }, []);
   return (
     <Card imagem={character.thumbnail}>
       <div
@@ -30,9 +37,15 @@ export function Character({
         }}
         aria-hidden="true"
       >
-        <label htmlFor="checkded" className="checkbox-container">
-          <input type="checkbox" checked={isChecked} readOnly />
-        </label>
+        <div className="fieldCheckBox">
+          <input
+            type="checkbox"
+            className="field"
+            id="checkbox"
+            checked={isChecked}
+          />
+          <label htmlFor="checkbox" className="checkBox" />
+        </div>
       </div>
       <button
         id="details"

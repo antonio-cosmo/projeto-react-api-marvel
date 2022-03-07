@@ -8,7 +8,7 @@ export function Routers() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="send" element={<ToSend />} />
+      <Route path="tosend" element={<ToSend />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

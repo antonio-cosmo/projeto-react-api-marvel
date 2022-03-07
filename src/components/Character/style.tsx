@@ -26,15 +26,29 @@ export const Card = styled.li`
     border-top-right-radius: 5px;
     cursor: pointer;
 
-    .checkbox-container {
-      input {
-        height: 20px;
-        width: 20px;
-        cursor: pointer;
-        &:not(:checked) {
-          display: none;
-        }
-      }
+    .field {
+      display: none;
+    }
+    .fieldCheckBox {
+      position: relative;
+    }
+    .fieldCheckBox .field:not(:checked) + .checkBox::before {
+      display: none;
+    }
+
+    .fieldCheckBox .field:checked + .checkBox::before {
+      content: '✔';
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      background-color: #ff3333;
+      border-top-left-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 
