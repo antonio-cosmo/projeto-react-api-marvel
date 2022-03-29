@@ -5,73 +5,71 @@ import { Character } from '../../components/Character';
 import { Loading } from '../../components/Loading';
 import { ModalCharacter } from '../../components/ModalCharacter';
 import { useCharacters } from '../../hooks/useCharacters';
-import { Container, CardList, Content, Button } from './style';
+import { CardList, Content, Button } from './style';
 
 export function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [characterInfor, setCharacterInfor] = useState(0);
+  const [characterIndex, setCharacterIndex] = useState(0);
   const { characters, handleMore, totalCharacters, removeLoading } =
     useCharacters();
 
   // Indice do personagem clicado no button detalhes
-  const clickedCharacter = useCallback((index: number) => {
-    setCharacterInfor(index);
+  const clickedDetails = useCallback((index: number) => {
+    setCharacterIndex(index);
   }, []);
 
-  // Abrir o modal
-  const handleOpenModal = useCallback(
-    () => setModalIsOpen(!modalIsOpen),
-    [modalIsOpen]
-  );
-
-  // Fechar o modal
-  const handleCloseModal = useCallback(
-    () => setModalIsOpen(!modalIsOpen),
-    [modalIsOpen]
+  // fechar ou abrir modal
+  const handleToggleModal = useCallback(
+    () => setModalIsOpen((prevModalIsOpen) => !prevModalIsOpen),
+    []
   );
 
   return (
-    <Container>
+    <main>
       <ModalCharacter
         isOpen={modalIsOpen}
-        onRequestClose={handleCloseModal}
-        characterInfor={characters[characterInfor]}
+        onRequestClose={handleToggleModal}
+        characterInfor={characters[characterIndex]}
       />
       <Content>
         {characters.length > 0 && (
           <>
             <Link to="tosend">
-              <Button type="button" onClick={handleMore}>
-                Enviar-me
-              </Button>
+              <Button type="button">Enviar-me</Button>
             </Link>
             <CardList>
-              {characters.map((comic, index) => {
+              {characters.map((character, index) => {
                 return (
                   <Character
-                    key={comic.id}
-                    character={comic}
-                    onOpenModal={handleOpenModal}
-                    clickedCharacter={clickedCharacter}
+                    key={character.id}
+                    character={character}
+                    onOpenModal={handleToggleModal}
+                    clickedDetails={clickedDetails}
                     index={index}
                   />
                 );
               })}
             </CardList>
-            {totalCharacters === characters.length ? (
-              <></>
+            {characters.length >= totalCharacters ? (
+              <div>
+                <Button id="more" type="button" onClick={handleMore} disabled>
+                  Carregar mais
+                </Button>
+              </div>
             ) : (
-              <Button id="more" type="button" onClick={handleMore}>
-                Carregar mais
-              </Button>
+              <div>
+                <Button id="more" type="button" onClick={handleMore}>
+                  Carregar mais
+                </Button>
+              </div>
             )}
           </>
         )}
-        {!removeLoading && <Loading />}
         {removeLoading && characters.length === 0 && (
           <p id="msg">Personagem não encontrado</p>
         )}
       </Content>
-    </Container>
+      {!removeLoading && <Loading />}
+    </main>
   );
 }

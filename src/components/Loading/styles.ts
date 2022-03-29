@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
-  position: absolute;
   z-index: 999;
 
   img {

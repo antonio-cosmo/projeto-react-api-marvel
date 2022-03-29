@@ -13,9 +13,9 @@ export function Header() {
         </ItemLink>
         <Search onSubmit={(event) => event.preventDefault()}>
           <input
-            type="text"
+            type="search"
             placeholder="Pesquisar..."
-            onChange={(event) => handleSearch(event.target.value)}
+            onChange={handleSearch}
           />
         </Search>
       </Contain>

@@ -20,7 +20,7 @@ const Api = axios.create({
 
 export async function getCharacters(offset: number, nameStartsWith?: string) {
   const response = await Api.get('characters', {
-    params: { offset, limit: 9, nameStartsWith },
+    params: { offset, limit: 12, nameStartsWith },
   });
   const { results, total } = response.data.data;
 

@@ -22,13 +22,28 @@ export const Card = styled.li`
     background: url(${urlImg}) no-repeat center;
     background-size: cover;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+
+    button {
+      background: transparent;
+      border: none;
+      img {
+        width: 18px;
+        margin: 5px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   p {
     align-self: center;
   }
 
-  button {
+  /* button {
     font-size: 1rem;
     font-weight: 700;
     padding: 0.2rem 1rem;
@@ -39,7 +54,7 @@ export const Card = styled.li`
     &:hover {
       background-color: #ff9999;
     }
-  }
+  } */
 
   @media (min-width: 880px) and (max-width: 1019px) {
     width: 160px;

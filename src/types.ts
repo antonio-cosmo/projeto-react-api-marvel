@@ -1,3 +1,5 @@
+import { FormEvent } from 'react';
+
 export interface ICharacter {
   id: number;
   name: string;
@@ -15,7 +17,8 @@ export interface ICharacterContextData {
   characters: ICharacter[];
   removeLoading: boolean;
   totalCharacters: number;
-  handleSearch: (name: string) => void;
+  // handleSearch: (name: string) => void;
+  handleSearch: (e: FormEvent) => void;
   handleSelect: (character: ICharacter) => void;
   handleRemove: (id: number) => void;
   handleMore: () => Promise<void>;

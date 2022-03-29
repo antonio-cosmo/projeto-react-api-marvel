@@ -1,3 +1,4 @@
+import iconDelete from '../../assets/excluir.svg';
 import { ICharacter } from '../../types';
 import { Card } from './style';
 
@@ -12,11 +13,12 @@ export function CharacterSelected({
 }: ICharacterProps) {
   return (
     <Card imagem={character.thumbnail}>
-      <div id="imgComic" />
+      <div id="imgComic">
+        <button type="button" onClick={() => handleRemove(character.id)}>
+          <img src={iconDelete} alt="excluir" />
+        </button>
+      </div>
       <p>{character.name}</p>
-      <button type="button" onClick={() => handleRemove(character.id)}>
-        remover
-      </button>
     </Card>
   );
 }
