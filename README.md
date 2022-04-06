@@ -6,16 +6,13 @@ Este projeto conecta-se com a API oficial da Marvel [https://developer.marvel.co
 
 ### Funcionalidades
 
-  - Criação de uma lista de cards para exibir os quadrinhos mostrando a imagem e o nome;
+  - Campo de busca de personagens (o nome inserido do personagem deve ser em inglês);
 
-  - Possibilidade de buscar novos quadrinhos;
+  - Selecionar personagens para envio dos quadrinhos
+  
+  - Opção de detalhes do personagem
 
-  - Selecionar quadrinhos para ser enviado
-
-  - Pesquisar um endereço no mapa
-
-
-
+  - Pesquisar endereço de envio no mapa
 
 ### Principais Tecnlogias utilizadas
 
@@ -41,16 +38,11 @@ Este projeto conecta-se com a API oficial da Marvel [https://developer.marvel.co
 
 No diretório do projeto deve-se exeutar o comando  `npm install` para instalação das dependencias do projeto.
 
-Antes de executar os comando `npm start`; no derietorio do projeto na pasta `src/services` nos arquivos de `ApiMaps.ts` e `ApiMarvel.ts` deve-se colocar suas chaves de API do google-maps e api-marvel. Sem as chaves o projeto não irar renderizar as informações.
+Antes de iniciar aplicação, insira as chaves de API do google-maps e api-marvel nos arquivos `ApiMaps.ts` e `ApiMarvel.ts` que se encontra no derietorio `src/services`. 
 
-Após o carregamento das dependencias e inserção da chaves de API; execute o comando: `npm start` :
+Apos a inserção das chaves das API execute o comando `npm start` para executar a aplicação no modo desenvolvimento. A aplicação estara execuntado no seu navegador no endereço http://localhost:3000.
 
-O comando executa o aplicativo no modo de desenvolvimento.\
-Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo em seu navegador.
-A página será recarregada quando você fizer alterações.\
-Você também pode ver erros de lint no console.
-
-Com o comando: `npm run build`; O aplicativo é compilado para produção na pasta `build`.\
+Com o comando `npm run build` a aplicação é compilada para produção e gerado um diretorio `build`.\
 Ele agrupa corretamente o React no modo de produção e otimiza a compilação para o melhor desempenho. O aplicativo está pronto para ser implantado!
 
 
