@@ -32,7 +32,7 @@ Este projeto conecta-se com a API oficial da Marvel [https://developer.marvel.co
 [https://cosmo-api-marvel.vercel.app/](https://cosmo-api-marvel.vercel.app/)
 
 #### Link do projeto no GitHub:
-[https://github.com/antonio-cosmo/projeto-react-api-marvel](https://github.com/antonio-cosmo/projeto-react-api-marvel)
+[https://github.com/antonio-cosmo/reactjsComApiMarvel](https://github.com/antonio-cosmo/reactjsComApiMarvel)
 
 # Executando a aplicação
 
