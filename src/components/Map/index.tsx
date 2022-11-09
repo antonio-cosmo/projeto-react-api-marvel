@@ -13,8 +13,8 @@ interface IMapComponentProps {
 
 export function Map({ location, zoom, marker, clickMap }: IMapComponentProps) {
   let key = '';
-  if (process.env.REACT_APP_GOOGLE_KEY) {
-    key = process.env.REACT_APP_GOOGLE_KEY;
+  if (import.meta.env.VITE_APP_GOOGLE_KEY) {
+    key = import.meta.env.VITE_APP_GOOGLE_KEY;
   }
   const styleMap = {
     maxWidth: '1020px',
