@@ -27,21 +27,3 @@ export async function getCharacters(offset: number, nameStartsWith?: string) {
   return [results, total];
 }
 
-// export async function getCharacterId(id: number) {
-//   const response = await Api.get('characters', {
-//     params: { id },
-//   });
-
-//   const [data] = response.data.data.results;
-
-//   return data;
-// }
-
-// export async function getComics(limit: number, titleStartsWith?: string) {
-//   const response = await Api.get('comics', {
-//     params: { limit, titleStartsWith },
-//   });
-//   const { results, total } = response.data.data;
-
-//   return [results, total];
-// }

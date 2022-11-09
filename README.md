@@ -1,20 +1,58 @@
-<h1 align="center">
-  API MARVEL REACTJS
-</h1>
+# Mervel Characters
+
+Lista e mostra detalhes dos personagens da marvel.
 
 Este projeto conecta-se com a API oficial da Marvel [https://developer.marvel.com/docs#](https://developer.marvel.com/docs#) e possui as seguintes funcionalidades;
 
-### Funcionalidades
+
+## Demonstração
+
+[https://cosmo-api-marvel.vercel.app/](https://cosmo-api-marvel.vercel.app/)
+
+
+## Funcionalidades
 
   - Campo de busca de personagens (o nome inserido do personagem deve ser em inglês);
 
-  - Selecionar personagens para envio dos quadrinhos
+  - Seleção de personagens
   
   - Opção de detalhes do personagem
 
   - Pesquisar endereço de envio no mapa
 
-### Principais Tecnlogias utilizadas
+
+
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  https://github.com/antonio-cosmo/appCashFlow.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd appCashFlow
+
+```
+
+Instale as dependências
+
+```bash
+  npm install ou yarn add
+```
+
+Antes de iniciar aplicação, insira as chaves de API do google-maps e api-marvel nos arquivos `ApiMaps.ts` e `ApiMarvel.ts` que se encontra no derietorio `src/services`. 
+
+Inicie a aplicação no modo de desenvolvimento
+
+```bash
+  npm run dev ou yarn dev
+```
+
+
+## Stack utilizada
 
   - ReactJS utilizando create-react-app como base;
 
@@ -27,22 +65,5 @@ Este projeto conecta-se com a API oficial da Marvel [https://developer.marvel.co
   - React-modal para criação do modal
 
   - @react-google-maps/api para criar o mapa
-
-#### A aplicação esta funcional e disponivel em:
-[https://cosmo-api-marvel.vercel.app/](https://cosmo-api-marvel.vercel.app/)
-
-#### Link do projeto no GitHub:
-[https://github.com/antonio-cosmo/reactjsComApiMarvel](https://github.com/antonio-cosmo/reactjsComApiMarvel)
-
-# Executando a aplicação
-
-No diretório do projeto deve-se exeutar o comando  `npm install` para instalação das dependencias do projeto.
-
-Antes de iniciar aplicação, insira as chaves de API do google-maps e api-marvel nos arquivos `ApiMaps.ts` e `ApiMarvel.ts` que se encontra no derietorio `src/services`. 
-
-Apos a inserção das chaves das API execute o comando `npm start` para executar a aplicação no modo desenvolvimento. A aplicação estara execuntado no seu navegador no endereço http://localhost:3000.
-
-Com o comando `npm run build` a aplicação é compilada para produção e gerado um diretorio `build`.\
-Ele agrupa corretamente o React no modo de produção e otimiza a compilação para o melhor desempenho. O aplicativo está pronto para ser implantado!
 
 
